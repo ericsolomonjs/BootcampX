@@ -9,12 +9,15 @@ const pool = new Pool({
   database: 'bootcampx'
 });
 
-pool.query(`SELECT teachers.name, cohorts.id 
+let text = `SELECT teachers.name, cohorts.id 
 FROM assistance_requests
 JOIN teachers ON assistance_requests.teacher_id = teachers.id
 JOIN cohorts ON teachers.cohort_id
-WHERE cohorts.name = '${myArgs[0]}'
-ORDER BY teachers.name;`)
+WHERE cohorts.name = '$1'
+ORDER BY teachers.name;`;
+let values = [myArgs[0]]
+
+pool.query()
 .then(() => {
   console.log(`${res.id}: ${res.name}`);
 })
